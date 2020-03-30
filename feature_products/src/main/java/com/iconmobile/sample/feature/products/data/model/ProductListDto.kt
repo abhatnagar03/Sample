@@ -4,11 +4,11 @@ package com.iconmobile.sample.feature.products.data.model
 
 import com.squareup.moshi.Json
 
-data class ProductDataModel(
-    @field:Json(name = "products") val products: List<Product>
+data class ProductListDto(
+    @field:Json(name = "products") val products: List<ProductDto>
 )
 
-data class Product(
+data class ProductDto(
     @field:Json(name = "name") val name: String,
     @field:Json(name = "brand") val brand: String,
     @field:Json(name = "uuid") val id: Int,
