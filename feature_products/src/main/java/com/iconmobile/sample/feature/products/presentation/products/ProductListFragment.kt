@@ -49,6 +49,10 @@ internal class ProductListFragment : BaseContainerFragment() {
             viewModel.loadProducts()
         }
 
+        productAdapter.deleteItem = {
+            viewModel.deleteProduct(it)
+        }
+
         fab.setOnDebouncedClickListener {
             val navDirections =
                 ProductListFragmentDirections.actionProductListToAddProduct()

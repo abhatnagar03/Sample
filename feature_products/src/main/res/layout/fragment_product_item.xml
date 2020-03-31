@@ -4,11 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@android:color/transparent"
     android:clickable="true"
-    android:paddingBottom="30dp"
     android:focusable="true"
     android:gravity="center_horizontal"
-    android:background="@android:color/transparent">
+    android:paddingBottom="30dp">
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/cardView"
@@ -31,9 +31,9 @@
             android:id="@+id/productErrorImageView"
             android:layout_width="48dp"
             android:layout_height="48dp"
-            android:src="@drawable/ic_image"
-            android:alpha="0.5"
             android:layout_gravity="center"
+            android:alpha="0.5"
+            android:src="@drawable/ic_image"
             android:visibility="gone" />
     </com.google.android.material.card.MaterialCardView>
 
@@ -41,17 +41,17 @@
         android:id="@+id/productBrandName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingTop="@dimen/space_medium"
-        android:paddingLeft="@dimen/space_medium"
-        android:paddingRight="@dimen/space_medium"
         android:layout_gravity="center_vertical"
-        android:gravity="center"
-        android:textStyle="bold"
-        android:textSize="17sp"
-        android:textColor="@android:color/black"
-        android:textAllCaps="true"
-        android:maxLines="1"
         android:ellipsize="end"
+        android:gravity="center"
+        android:maxLines="1"
+        android:paddingLeft="@dimen/space_medium"
+        android:paddingTop="@dimen/space_medium"
+        android:paddingRight="@dimen/space_medium"
+        android:textAllCaps="true"
+        android:textColor="@android:color/black"
+        android:textSize="17sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/cardView"
         tools:text="Catalog Brand Name" />
@@ -61,11 +61,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
-        android:paddingLeft="@dimen/space_medium"
-        android:textSize="18sp"
-        android:maxLines="1"
         android:ellipsize="end"
+        android:maxLines="1"
+        android:paddingLeft="@dimen/space_medium"
         android:textColor="@android:color/black"
+        android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/productBrandName"
         tools:text="Catalog Name" />
@@ -76,12 +76,21 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:gravity="center"
-        android:textSize="18sp"
-        android:paddingTop="@dimen/space_medium"
         android:paddingLeft="@dimen/space_medium"
-        android:textStyle="italic"
+        android:paddingTop="@dimen/space_medium"
         android:textColor="@android:color/black"
+        android:textSize="18sp"
+        android:textStyle="italic"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/productName"
         tools:text="$ 79,99" />
+
+    <ImageView
+        android:id="@+id/deleteIcon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/space_medium"
+        android:src="@drawable/ic_delete"
+        app:layout_constraintRight_toRightOf="@+id/cardView"
+        app:layout_constraintTop_toTopOf="@+id/cardView" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -10,9 +10,12 @@ import coil.transform.RoundedCornersTransformation
 import com.iconmobile.sample.feature.products.R
 import com.iconmobile.sample.feature.products.domain.model.Product
 import com.iconmobile.sample.library.base.presentation.delegate.observer
+import com.iconmobile.sample.library.base.presentation.extension.setOnDebouncedClickListener
 import kotlinx.android.synthetic.main.fragment_product_item.view.*
 
 internal class ProductAdapter : RecyclerView.Adapter<ProductAdapter.MyViewHolder>() {
+
+    var deleteItem: ((String) -> Unit)? = null
 
     var products: List<Product> by observer(listOf()) {
         notifyDataSetChanged()
@@ -45,6 +48,10 @@ internal class ProductAdapter : RecyclerView.Adapter<ProductAdapter.MyViewHolder
                 error(R.drawable.ic_image)
                 transformations(RoundedCornersTransformation(0F))
                 scale(Scale.FILL)
+            }
+
+            itemView.deleteIcon.setOnDebouncedClickListener {
+                deleteItem?.invoke(product.id!!)
             }
         }
     }

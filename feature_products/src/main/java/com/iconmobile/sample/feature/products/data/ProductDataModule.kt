@@ -1,20 +1,19 @@
 package com.iconmobile.sample.feature.products.data
 
-import androidx.fragment.app.Fragment
 import com.iconmobile.sample.feature.products.FEATURE_NAME
 import com.iconmobile.sample.feature.products.data.mapper.ProductDomainToDtoMapper
 import com.iconmobile.sample.feature.products.data.mapper.ProductDtoToDomainMapper
 import com.iconmobile.sample.feature.products.data.mapper.ProductListDtoToDomainMapper
+import com.iconmobile.sample.feature.products.data.repository.DeleteProductRepositoryImpl
 import com.iconmobile.sample.feature.products.data.repository.ProductRepositoryImpl
 import com.iconmobile.sample.feature.products.data.repository.SaveProductRepositoryImpl
 import com.iconmobile.sample.feature.products.data.retrofit.service.RetrofitService
+import com.iconmobile.sample.feature.products.domain.repository.DeleteProductRepository
 import com.iconmobile.sample.feature.products.domain.repository.ProductRepository
 import com.iconmobile.sample.feature.products.domain.repository.SaveProductRepository
 import org.kodein.di.Kodein
-import org.kodein.di.android.x.AndroidLifecycleScope
 import org.kodein.di.generic.bind
 import org.kodein.di.generic.instance
-import org.kodein.di.generic.scoped
 import org.kodein.di.generic.singleton
 import retrofit2.Retrofit
 
@@ -43,4 +42,6 @@ internal val dataModule = Kodein.Module("${FEATURE_NAME}DataModule") {
             domainToDataMapper = instance()
         )
     }
+
+    bind<DeleteProductRepository>() with singleton { DeleteProductRepositoryImpl(instance()) }
 }

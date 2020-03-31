@@ -6,5 +6,6 @@
     <string name="enter_name">Enter name</string>
     <string name="enter_brand_name">Enter brand name</string>
     <string name="enter_description">Enter description</string>
+    <string name="enter_price">Enter price</string>
     <string name="save_product">save</string>
 </resources>
