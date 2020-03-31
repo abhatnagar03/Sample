@@ -5,7 +5,7 @@ import com.iconmobile.sample.feature.products.R
 import java.text.NumberFormat
 import java.util.*
 
-fun Context.transformPrice(currency: String?, price: Double?): String =
+fun Context.transformPrice(currency: String?, price: Double?): String? =
     String.format(
         resources.getString(
             R.string.product_price

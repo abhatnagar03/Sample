@@ -14,6 +14,7 @@ import com.iconmobile.sample.feature.products.domain.model.Product
 import com.iconmobile.sample.feature.products.presentation.products.transformPrice
 import com.iconmobile.sample.library.base.presentation.delegate.observer
 import com.iconmobile.sample.library.base.presentation.extension.setOnDebouncedClickListener
+import com.pawegio.kandroid.visible
 import kotlinx.android.synthetic.main.fragment_product_item.view.*
 
 internal class ProductAdapter : RecyclerView.Adapter<ProductAdapter.MyViewHolder>() {
@@ -50,10 +51,18 @@ internal class ProductAdapter : RecyclerView.Adapter<ProductAdapter.MyViewHolder
     ) : RecyclerView.ViewHolder(itemView) {
 
         fun bind(product: Product) {
-            itemView.productName.text = product.name
-            itemView.productBrandName.text = product.brand
-            itemView.productPrice.text =
-                splitCompatInstalledContext?.transformPrice(product.currency, product.price)
+            product.name?.let {
+                itemView.productName.text = it
+                itemView.productName.visible = it.isNotBlank()
+            }
+            product.brand?.let {
+                itemView.productBrandName.text = it
+                itemView.productBrandName.visible = it.isNotBlank()
+            }
+            product.price?.let {
+                itemView.productPrice.text =
+                    splitCompatInstalledContext?.transformPrice(product.currency, product.price)
+            } ?: run { itemView.productPrice.visible = false }
 
             itemView.productImageView.load(product.imageURL) {
                 crossfade(true)

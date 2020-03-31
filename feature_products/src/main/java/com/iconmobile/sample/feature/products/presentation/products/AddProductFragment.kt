@@ -64,7 +64,7 @@ internal class AddProductFragment : BaseContainerFragment() {
                 name.setText(product.name)
                 brandName.setText(product.brand)
                 description.setText(product.description)
-                price.setText(product.price.toString())
+                price.setText(product.price?.toString())
                 currencySpinner.setSelection(currencyAdapter.getPosition(product.currency))
                 imageSpinner.setSelection(imageAdapter.getPosition(product.imageURL))
             }
