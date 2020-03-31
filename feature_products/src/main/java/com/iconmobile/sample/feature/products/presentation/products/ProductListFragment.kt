@@ -3,6 +3,7 @@ package com.iconmobile.sample.feature.products.presentation.products
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.iconmobile.sample.feature.products.R
 import com.iconmobile.sample.feature.products.domain.model.Product
@@ -15,7 +16,7 @@ import com.pawegio.kandroid.visible
 import kotlinx.android.synthetic.main.fragment_product.*
 import org.kodein.di.generic.instance
 
-internal class ProductFragment : BaseContainerFragment() {
+internal class ProductListFragment : BaseContainerFragment() {
 
     private val viewModel: ProductViewModel by instance()
     private val productAdapter: ProductAdapter by instance()
@@ -47,6 +48,13 @@ internal class ProductFragment : BaseContainerFragment() {
         retryBtn.setOnDebouncedClickListener {
             viewModel.loadProducts()
         }
+
+        fab.setOnDebouncedClickListener {
+            val navDirections =
+                ProductListFragmentDirections.actionProductListToAddProduct()
+            findNavController().navigate(navDirections)
+        }
         viewLifecycleOwner.observe(viewModel.stateLiveData, stateObserver)
+        viewModel.loadProducts()
     }
 }

@@ -2,7 +2,7 @@ package com.iconmobile.sample.feature.products.presentation.products
 
 import androidx.lifecycle.viewModelScope
 import com.iconmobile.sample.feature.products.domain.model.Product
-import com.iconmobile.sample.feature.products.domain.usecase.GetProductUseCase
+import com.iconmobile.sample.feature.products.domain.usecase.LoadProductListUseCase
 import com.iconmobile.sample.library.base.domain.DomainResultWrapper
 import com.iconmobile.sample.library.base.presentation.NetworkState
 import com.iconmobile.sample.library.base.presentation.Status
@@ -12,12 +12,8 @@ import com.iconmobile.sample.library.base.presentation.viewmodel.BaseViewState
 import kotlinx.coroutines.launch
 
 internal class ProductViewModel(
-    private val getProductUseCase: GetProductUseCase
+    private val getProductUseCase: LoadProductListUseCase
 ) : BaseViewModel<ProductViewModel.ViewState, ProductViewModel.Action>(ViewState()) {
-
-    init {
-        loadData()
-    }
 
     fun loadProducts() {
         loadData()
@@ -90,7 +86,7 @@ internal class ProductViewModel(
                                 sendAction(
                                     Action.ProductsRequestState(
                                         NetworkState.LOADED,
-                                        it.value
+                                        it.value.reversed()
                                     )
                                 )
                             } else {

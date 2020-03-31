@@ -2,6 +2,7 @@ package com.iconmobile.sample.feature.products.presentation
 
 import androidx.fragment.app.Fragment
 import com.iconmobile.sample.feature.products.FEATURE_NAME
+import com.iconmobile.sample.feature.products.presentation.products.AddProductViewModel
 import com.iconmobile.sample.feature.products.presentation.products.ProductViewModel
 import com.iconmobile.sample.feature.products.presentation.products.recyclerview.ProductAdapter
 import com.iconmobile.sample.library.base.presentation.di.KotlinViewModelProvider
@@ -16,6 +17,10 @@ internal val presentationModule = Kodein.Module("${FEATURE_NAME}PresentationModu
 
     bind<ProductViewModel>() with scoped<Fragment>(AndroidLifecycleScope).singleton {
         KotlinViewModelProvider.of(context) { ProductViewModel(instance()) }
+    }
+
+    bind<AddProductViewModel>() with scoped<Fragment>(AndroidLifecycleScope).singleton {
+        KotlinViewModelProvider.of(context) { AddProductViewModel(instance()) }
     }
 
     bind<ProductAdapter>() with scoped<Fragment>(AndroidLifecycleScope).singleton { ProductAdapter() }

@@ -2,9 +2,19 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/products_nav_graph"
-    app:startDestination="@+id/productFragment">
+    app:startDestination="@+id/productListFragment">
     <fragment
-        android:id="@+id/productFragment"
-        android:name="com.iconmobile.sample.feature.products.presentation.products.ProductFragment"
-        android:label="ProductFragment"/>
+        android:id="@+id/productListFragment"
+        android:name="com.iconmobile.sample.feature.products.presentation.products.ProductListFragment"
+        android:label="ProductListFragment">
+
+        <action
+            android:id="@+id/action_product_list_to_add_product"
+            app:destination="@id/addProductFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/addProductFragment"
+        android:name="com.iconmobile.sample.feature.products.presentation.products.AddProductFragment"
+        android:label="AddProductFragment" />
 </navigation>
