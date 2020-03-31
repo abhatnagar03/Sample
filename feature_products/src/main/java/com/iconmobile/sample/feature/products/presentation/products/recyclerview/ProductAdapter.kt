@@ -1,5 +1,6 @@
 package com.iconmobile.sample.feature.products.presentation.products.recyclerview
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -7,19 +8,29 @@ import androidx.recyclerview.widget.RecyclerView
 import coil.api.load
 import coil.size.Scale
 import coil.transform.RoundedCornersTransformation
+import com.google.android.play.core.splitcompat.SplitCompat
 import com.iconmobile.sample.feature.products.R
 import com.iconmobile.sample.feature.products.domain.model.Product
+import com.iconmobile.sample.feature.products.presentation.products.transformPrice
 import com.iconmobile.sample.library.base.presentation.delegate.observer
 import com.iconmobile.sample.library.base.presentation.extension.setOnDebouncedClickListener
 import kotlinx.android.synthetic.main.fragment_product_item.view.*
 
 internal class ProductAdapter : RecyclerView.Adapter<ProductAdapter.MyViewHolder>() {
 
+    var splitCompatInstalledContext: Context? = null
+
     var deleteItem: ((String) -> Unit)? = null
     var editItem: ((String) -> Unit)? = null
 
     var products: List<Product> by observer(listOf()) {
         notifyDataSetChanged()
+    }
+
+    override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
+        super.onAttachedToRecyclerView(recyclerView)
+        splitCompatInstalledContext = recyclerView.context
+        SplitCompat.install(splitCompatInstalledContext)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder =
@@ -42,7 +53,7 @@ internal class ProductAdapter : RecyclerView.Adapter<ProductAdapter.MyViewHolder
             itemView.productName.text = product.name
             itemView.productBrandName.text = product.brand
             itemView.productPrice.text =
-                "${product.price} ${product.currency} "
+                splitCompatInstalledContext?.transformPrice(product.currency, product.price)
 
             itemView.productImageView.load(product.imageURL) {
                 crossfade(true)

@@ -8,4 +8,5 @@
     <string name="enter_description">Enter description</string>
     <string name="enter_price">Enter price</string>
     <string name="save_product">save</string>
+    <string name="product_price">%s %s</string>
 </resources>
