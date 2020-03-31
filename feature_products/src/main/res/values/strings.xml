@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="data_not_found">Data not found</string>
+    <string name="data_not_found">No data available/string>
     <string name="retry">Retry</string>
     <string name="some_error_occurred">Some error occurred</string>
     <string name="enter_name">Enter name</string>

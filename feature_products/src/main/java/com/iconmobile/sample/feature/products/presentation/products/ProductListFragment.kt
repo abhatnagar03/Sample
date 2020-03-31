@@ -53,12 +53,20 @@ internal class ProductListFragment : BaseContainerFragment() {
             viewModel.deleteProduct(it)
         }
 
+        productAdapter.editItem = {
+            navigate(it)
+        }
+
         fab.setOnDebouncedClickListener {
-            val navDirections =
-                ProductListFragmentDirections.actionProductListToAddProduct()
-            findNavController().navigate(navDirections)
+            navigate()
         }
         viewLifecycleOwner.observe(viewModel.stateLiveData, stateObserver)
         viewModel.loadProducts()
+    }
+
+    private fun navigate(id: String = "") {
+        val navDirections =
+            ProductListFragmentDirections.actionProductListToAddProduct(id)
+        findNavController().navigate(navDirections)
     }
 }

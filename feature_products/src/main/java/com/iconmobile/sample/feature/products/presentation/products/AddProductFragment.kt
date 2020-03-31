@@ -24,16 +24,51 @@ import org.kodein.di.generic.instance
 
 internal class AddProductFragment : BaseContainerFragment() {
 
+    private var product: Product? = null
     private val viewModel: AddProductViewModel by instance()
 
     override val layoutResourceId = R.layout.fragment_add_product
 
+    private val currencyAdapter by lazy {
+        ArrayAdapter(
+            context!!,
+            android.R.layout.simple_spinner_item,
+            listOf("EUR", "GBP", "USD")
+        )
+    }
+
+    // The image data is currently hard coded with test URLs
+    // This can be automated by uploading image to server that returns a URI once upload is successful
+    private val imageAdapter by lazy {
+        ArrayAdapter(
+            context!!,
+            android.R.layout.simple_spinner_item,
+            listOf(
+                "https://homepages.cae.wisc.edu/~ece533/images/airplane.png",
+                "https://homepages.cae.wisc.edu/~ece533/images/arctichare.png",
+                "https://homepages.cae.wisc.edu/~ece533/images/baboon.png",
+                "https://homepages.cae.wisc.edu/~ece533/images/boat.png",
+                "https://homepages.cae.wisc.edu/~ece533/images/cat.png"
+            )
+        )
+    }
+
     private val stateObserver = Observer<AddProductViewModel.ViewState> {
-        if (it.isLoaded) {
-            toast("Product added successfully")
+        if (it.isLoaded && it.product == null) {
+            it.successMessage?.let { toast(it) }
             findNavController().popBackStack()
+        } else {
+            it.errorMessage?.let { toast(it) }
+            it.product?.let { product ->
+                this.product = product
+                name.setText(product.name)
+                brandName.setText(product.brand)
+                description.setText(product.description)
+                price.setText(product.price.toString())
+                currencySpinner.setSelection(currencyAdapter.getPosition(product.currency))
+                imageSpinner.setSelection(imageAdapter.getPosition(product.imageURL))
+            }
         }
-        it.errorMessage?.let { toast(it) }
     }
 
     override fun onCreateView(
@@ -54,6 +89,7 @@ internal class AddProductFragment : BaseContainerFragment() {
         saveButton.setOnDebouncedClickListener {
             viewModel.saveProduct(
                 Product(
+                    id = product?.id,
                     name = name.text.toString(),
                     brand = brandName.text.toString(),
                     description = description.text.toString(),
@@ -69,31 +105,14 @@ internal class AddProductFragment : BaseContainerFragment() {
     }
 
     private fun setCurrencyData() {
-        val adapter = ArrayAdapter(
-            context!!,
-            android.R.layout.simple_spinner_item,
-            listOf("EUR", "GBP", "USD")
-        )
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        currencySpinner.adapter = adapter
+
+        currencyAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        currencySpinner.adapter = currencyAdapter
     }
 
-    // The image data is currently hard coded with test URLs
-    // This can be automated by uploading image to server that returns a URI once upload is successful
     private fun setImageData() {
-        val adapter = ArrayAdapter(
-            context!!,
-            android.R.layout.simple_spinner_item,
-            listOf(
-                "https://homepages.cae.wisc.edu/~ece533/images/airplane.png",
-                "https://homepages.cae.wisc.edu/~ece533/images/arctichare.png",
-                "https://homepages.cae.wisc.edu/~ece533/images/baboon.png",
-                "https://homepages.cae.wisc.edu/~ece533/images/boat.png",
-                "https://homepages.cae.wisc.edu/~ece533/images/cat.png"
-            )
-        )
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        imageSpinner.adapter = adapter
+        imageAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        imageSpinner.adapter = imageAdapter
 
         imageSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(p0: AdapterView<*>?) {
@@ -101,7 +120,7 @@ internal class AddProductFragment : BaseContainerFragment() {
             }
 
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, position: Int, p3: Long) {
-                url = adapter.getItem(position)
+                url = imageAdapter.getItem(position)
             }
         }
     }

@@ -4,13 +4,19 @@ import com.iconmobile.sample.feature.products.FEATURE_NAME
 import com.iconmobile.sample.feature.products.data.mapper.ProductDomainToDtoMapper
 import com.iconmobile.sample.feature.products.data.mapper.ProductDtoToDomainMapper
 import com.iconmobile.sample.feature.products.data.mapper.ProductListDtoToDomainMapper
+import com.iconmobile.sample.feature.products.data.repository.*
 import com.iconmobile.sample.feature.products.data.repository.DeleteProductRepositoryImpl
-import com.iconmobile.sample.feature.products.data.repository.ProductRepositoryImpl
+import com.iconmobile.sample.feature.products.data.repository.LoadProductListRepositoryImpl
+import com.iconmobile.sample.feature.products.data.repository.LoadProductRepositoryImpl
 import com.iconmobile.sample.feature.products.data.repository.SaveProductRepositoryImpl
+import com.iconmobile.sample.feature.products.data.repository.UpdateProductRepositoryImpl
 import com.iconmobile.sample.feature.products.data.retrofit.service.RetrofitService
+import com.iconmobile.sample.feature.products.domain.repository.*
 import com.iconmobile.sample.feature.products.domain.repository.DeleteProductRepository
-import com.iconmobile.sample.feature.products.domain.repository.ProductRepository
+import com.iconmobile.sample.feature.products.domain.repository.LoadProductListRepository
+import com.iconmobile.sample.feature.products.domain.repository.LoadProductRepository
 import com.iconmobile.sample.feature.products.domain.repository.SaveProductRepository
+import com.iconmobile.sample.feature.products.domain.repository.UpdateProductRepository
 import org.kodein.di.Kodein
 import org.kodein.di.generic.bind
 import org.kodein.di.generic.instance
@@ -33,7 +39,12 @@ internal val dataModule = Kodein.Module("${FEATURE_NAME}DataModule") {
         ProductDomainToDtoMapper()
     }
 
-    bind<ProductRepository>() with singleton { ProductRepositoryImpl(instance(), instance()) }
+    bind<LoadProductListRepository>() with singleton {
+        LoadProductListRepositoryImpl(
+            instance(),
+            instance()
+        )
+    }
 
     bind<SaveProductRepository>() with singleton {
         SaveProductRepositoryImpl(
@@ -44,4 +55,19 @@ internal val dataModule = Kodein.Module("${FEATURE_NAME}DataModule") {
     }
 
     bind<DeleteProductRepository>() with singleton { DeleteProductRepositoryImpl(instance()) }
+
+    bind<LoadProductRepository>() with singleton {
+        LoadProductRepositoryImpl(
+            instance(),
+            instance()
+        )
+    }
+
+    bind<UpdateProductRepository>() with singleton {
+        UpdateProductRepositoryImpl(
+            instance(),
+            instance(),
+            instance()
+        )
+    }
 }

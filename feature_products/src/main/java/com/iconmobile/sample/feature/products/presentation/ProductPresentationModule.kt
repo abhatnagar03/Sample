@@ -20,7 +20,7 @@ internal val presentationModule = Kodein.Module("${FEATURE_NAME}PresentationModu
     }
 
     bind<AddProductViewModel>() with scoped<Fragment>(AndroidLifecycleScope).singleton {
-        KotlinViewModelProvider.of(context) { AddProductViewModel(instance()) }
+        KotlinViewModelProvider.of(context) { AddProductViewModel(instance(), instance(), instance(), instance()) }
     }
 
     bind<ProductAdapter>() with scoped<Fragment>(AndroidLifecycleScope).singleton { ProductAdapter() }

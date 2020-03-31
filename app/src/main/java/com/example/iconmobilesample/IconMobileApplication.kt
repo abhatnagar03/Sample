@@ -2,6 +2,7 @@ package com.example.iconmobilesample
 
 import com.google.android.play.core.splitcompat.SplitCompatApplication
 import com.example.iconmobilesample.feature.FeatureManager
+import com.example.iconmobilesample.kodein.FragmentArgsExternalSource
 
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
@@ -12,5 +13,7 @@ class IconMobileApplication : SplitCompatApplication(), KodeinAware {
         import(androidXModule(this@IconMobileApplication))
         import(appModule)
         importAll(FeatureManager.kodeinModules)
+
+        externalSources.add(FragmentArgsExternalSource())
     }
 }

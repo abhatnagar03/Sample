@@ -1,9 +1,9 @@
 package com.iconmobile.sample.feature.products.domain.usecase
 
-import com.iconmobile.sample.feature.products.domain.repository.ProductRepository
+import com.iconmobile.sample.feature.products.domain.repository.LoadProductListRepository
 
 internal class LoadProductListUseCase(
-    private val productRepository: ProductRepository
+    private val loadProductListRepository: LoadProductListRepository
 ) {
-    suspend fun execute() = productRepository.getProducts()
+    suspend fun execute() = loadProductListRepository.getProducts()
 }

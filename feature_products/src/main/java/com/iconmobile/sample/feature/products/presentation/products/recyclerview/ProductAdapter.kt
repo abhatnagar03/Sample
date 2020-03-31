@@ -16,6 +16,7 @@ import kotlinx.android.synthetic.main.fragment_product_item.view.*
 internal class ProductAdapter : RecyclerView.Adapter<ProductAdapter.MyViewHolder>() {
 
     var deleteItem: ((String) -> Unit)? = null
+    var editItem: ((String) -> Unit)? = null
 
     var products: List<Product> by observer(listOf()) {
         notifyDataSetChanged()
@@ -52,6 +53,10 @@ internal class ProductAdapter : RecyclerView.Adapter<ProductAdapter.MyViewHolder
 
             itemView.deleteIcon.setOnDebouncedClickListener {
                 deleteItem?.invoke(product.id!!)
+            }
+
+            itemView.cardView.setOnDebouncedClickListener {
+                editItem?.invoke(product.id!!)
             }
         }
     }
