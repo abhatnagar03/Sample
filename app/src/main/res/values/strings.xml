@@ -1,6 +1,10 @@
 <resources>
    <string name="app_name">IconMobileSample</string>
 
+   <!--Dynamic module titles-->
+   <string name="feature_products">feature products</string>
+   <string name="title_feature_products">Products</string>
+
    <!--Bottom menu-->
    <string name="products">Products</string>
 </resources>

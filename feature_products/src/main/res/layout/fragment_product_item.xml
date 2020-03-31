@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:clickable="true"
+    android:paddingBottom="30dp"
+    android:focusable="true"
+    android:gravity="center_horizontal"
+    android:background="@android:color/transparent">
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardView"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:layout_margin="3dp"
+        app:cardBackgroundColor="#37000000"
+        app:cardCornerRadius="0dp"
+        app:cardElevation="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/productImageView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/productErrorImageView"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:src="@drawable/ic_image"
+            android:alpha="0.5"
+            android:layout_gravity="center"
+            android:visibility="gone" />
+    </com.google.android.material.card.MaterialCardView>
+
+    <TextView
+        android:id="@+id/productBrandName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/space_medium"
+        android:paddingLeft="@dimen/space_medium"
+        android:paddingRight="@dimen/space_medium"
+        android:layout_gravity="center_vertical"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:textSize="17sp"
+        android:textColor="@android:color/black"
+        android:textAllCaps="true"
+        android:maxLines="1"
+        android:ellipsize="end"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cardView"
+        tools:text="Catalog Brand Name" />
+
+    <TextView
+        android:id="@+id/productName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:paddingLeft="@dimen/space_medium"
+        android:textSize="18sp"
+        android:maxLines="1"
+        android:ellipsize="end"
+        android:textColor="@android:color/black"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/productBrandName"
+        tools:text="Catalog Name" />
+
+    <TextView
+        android:id="@+id/productPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:gravity="center"
+        android:textSize="18sp"
+        android:paddingTop="@dimen/space_medium"
+        android:paddingLeft="@dimen/space_medium"
+        android:textStyle="italic"
+        android:textColor="@android:color/black"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/productName"
+        tools:text="$ 79,99" />
+</androidx.constraintlayout.widget.ConstraintLayout>
