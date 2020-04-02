@@ -50,7 +50,7 @@ Material design
 }
 ```
 
-4. Run `json-server --watch product.json` 
+4. Run `json-server --watch products.json` 
 5. Connect Android phone to system using USB and then run `chrome://inspect`
 6. Enable port forwarding for port localhost:3000
 7. Add Android phone wifi IP Address in [sudo file](https://stackoverflow.com/questions/11005540/localhost-running-on-mac-can-i-view-it-on-my-android-phone)
